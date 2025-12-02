@@ -5,53 +5,278 @@
     <title>Cardinal Transportation Client Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f8f8f8; }
-        .header { background: #b22222; color: #fff; padding: 20px 0; text-align: center; }
-        .logo { max-width: 120px; margin-bottom: 10px; }
-        .container { max-width: 700px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1 { margin-top: 0; }
-        .section { margin-bottom: 30px; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 15px 0; }
-        .download-btn { background: #b22222; color: #fff; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: inline-block; cursor: pointer; }
-        .download-btn:hover { background: #8b1a1a; }
-        .contact { background: #f2f2f2; padding: 15px; border-radius: 6px; }
-        @media (max-width: 600px) {
-            .container { padding: 15px; }
+        .accordion {
+            margin-bottom: 24px;
+        }
+        .accordion-btn {
+            background: #b22222;
+            color: #fff;
+            cursor: pointer;
+            padding: 12px 24px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+            margin-bottom: 4px;
+        }
+        .accordion-btn:hover {
+            background: #8b1a1a;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #f7f7f7;
+            padding: 0 18px;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(178,34,34,0.04);
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+        }
+        .wpr-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+        }
+        .wpr-tile {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(178,34,34,0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 10px 16px 10px;
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .wpr-tile:hover {
+            box-shadow: 0 4px 16px rgba(178,34,34,0.18);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .wpr-icon {
+            width: 38px;
+            height: 38px;
+            margin-bottom: 10px;
+        }
+        .wpr-title {
+            font-size: 1rem;
+            color: #b22222;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .wpr-link {
+            background: #b22222;
+            color: #fff;
+            border-radius: 4px;
+            padding: 6px 16px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .wpr-link:hover {
+            background: #8b1a1a;
+        }
+        .accordion-content.active {
+            max-height: 350px;
+            padding: 16px 18px;
+            overflow-y: auto;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #f8f8f8 60%, #e3e3e3 100%);
+            color: #222;
+        }
+        .header {
+            background: #fff;
+            color: #b22222;
+            padding: 32px 0 16px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(178,34,34,0.08);
+        }
+        .logo {
+            max-width: 180px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 4px rgba(178,34,34,0.15));
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px 32px;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(178,34,34,0.10);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: #b22222;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .section {
+            margin-bottom: 36px;
+        }
+        ul.document-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul.document-list li {
+            margin: 18px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: #f7f7f7;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(178,34,34,0.04);
+        }
+        .download-btn {
+            background: #b22222;
+            color: #fff;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background 0.2s;
+            box-shadow: 0 2px 6px rgba(178,34,34,0.08);
+        }
+        .download-btn:hover {
+            background: #8b1a1a;
+        }
+        .contact {
+            background: #f2f2f2;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(178,34,34,0.04);
+        }
+        .announcements {
+            background: #fff7f7;
+            border-left: 4px solid #b22222;
+            padding: 16px 18px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 18px 6px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <!-- Replace with your logo file path -->
         <img src="logo.png" alt="Cardinal Transportation Logo" class="logo">
-        <h1>Client Portal</h1>
+        <h1>Cardinal Transportation Client Portal</h1>
     </div>
     <div class="container">
         <div class="section">
-            <h2>Documents</h2>
-            <ul>
-                <li>
-                    <span>Client A - Monthly Report</span>
-                    <a href="docs/Client-A-Monthly-Report.md" class="download-btn" download>Download</a>
-                </li>
-                <li>
-                    <span>Client B - Quarterly Invoice</span>
-                    <a href="docs/Client-B-Quarterly-Invoice.md" class="download-btn" download>Download</a>
-                </li>
-                <!-- Add more documents as needed -->
-            </ul>
-        </div>
-        <div class="section">
-            <h2>Announcements</h2>
-            <p>Welcome to the Cardinal Transportation Client Portal. Access your important documents here.</p>
-        </div>
-        <div class="section contact">
-            <h2>Contact Us</h2>
-            <p>For questions or assistance, please contact:<br>
-            Email: support@cardinaltransportation.com<br>
-            Phone: (555) 123-4567</p>
+            <h2>Resources</h2>
+            <div class="accordion">
+                <button class="accordion-btn">WPR's</button>
+                <div class="accordion-content">
+                    <div class="wpr-grid">
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-06-04 WPR</div>
+                            <a href="docs/WPR's/2025-06-04_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-06-13 WPR</div>
+                            <a href="docs/WPR's/2025-06-13_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-06-20 WPR</div>
+                            <a href="docs/WPR's/2025-06-20_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-06-27 WPR</div>
+                            <a href="docs/WPR's/2025-06-27_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-07-11 WPR</div>
+                            <a href="docs/WPR's/2025-07-11_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-08-01 WPR</div>
+                            <a href="docs/WPR's/2025-08-01_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-08-22 WPR</div>
+                            <a href="docs/WPR's/2025-08-22_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-09-19 WPR</div>
+                            <a href="docs/WPR's/2025-09-19_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-10-03 WPR</div>
+                            <a href="docs/WPR's/2025-10-03_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-10-17 WPR</div>
+                            <a href="docs/WPR's/2025-10-17_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-10-24 WPR</div>
+                            <a href="docs/WPR's/2025-10-24_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                        <div class="wpr-tile">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                            <div class="wpr-title">2025-11-21 WPR</div>
+                            <a href="docs/WPR's/2025-11-21_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="accordion-btn">Buckeye</button>
+                <div class="accordion-content">
+                    <div class="wpr-grid">
+                        <!-- Buckeye documents will be added here when requested -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+    // Accordion functionality for all sections
+    document.addEventListener('DOMContentLoaded', function() {
+        var accordionBtns = document.querySelectorAll('.accordion-btn');
+        accordionBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var content = btn.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+    });
+    </script>
 </body>
 </html>
