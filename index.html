@@ -5,69 +5,179 @@
     <title>Cardinal Transportation Client Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .accordion { margin-bottom: 24px; }
+        .accordion {
+            margin-bottom: 24px;
+        }
         .accordion-btn {
-            background: #b22222; color: #fff; cursor: pointer; padding: 12px 24px; width: 100%;
-            border: none; text-align: left; outline: none; font-size: 1.2rem; border-radius: 6px;
-            transition: background 0.2s; margin-bottom: 4px;
+            background: #b22222;
+            color: #fff;
+            cursor: pointer;
+            padding: 12px 24px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+            margin-bottom: 4px;
         }
-        .accordion-btn:hover { background: #8b1a1a; }
+        .accordion-btn:hover {
+            background: #8b1a1a;
+        }
         .accordion-content {
-            max-height: 0; overflow: hidden; background: #f7f7f7; padding: 0 18px; border-radius: 6px;
-            box-shadow: 0 1px 2px rgba(178,34,34,0.04); transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+            max-height: 0;
+            overflow: hidden;
+            background: #f7f7f7;
+            padding: 0 18px;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(178,34,34,0.04);
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
         }
-        .wpr-grid { display: flex; flex-wrap: wrap; gap: 18px; margin: 0; padding: 0; }
+        .wpr-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+        }
         .wpr-tile {
-            background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(178,34,34,0.10);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 22px 10px 16px 10px; transition: box-shadow 0.2s, transform 0.2s; cursor: pointer;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(178,34,34,0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 10px 16px 10px;
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
         }
-        .wpr-tile:hover { box-shadow: 0 4px 16px rgba(178,34,34,0.18); transform: translateY(-2px) scale(1.03); }
-        .wpr-icon { width: 38px; height: 38px; margin-bottom: 10px; }
-        .wpr-title { font-size: 1rem; color: #b22222; font-weight: 600; text-align: center; margin-bottom: 6px; }
+        .wpr-tile:hover {
+            box-shadow: 0 4px 16px rgba(178,34,34,0.18);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .wpr-icon {
+            width: 38px;
+            height: 38px;
+            margin-bottom: 10px;
+        }
+        .wpr-title {
+            font-size: 1rem;
+            color: #b22222;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 6px;
+        }
         .wpr-link {
-            background: #b22222; color: #fff; border-radius: 4px; padding: 6px 16px; text-decoration: none;
-            font-size: 0.95rem; font-weight: 500; margin-top: 8px; transition: background 0.2s;
+            background: #b22222;
+            color: #fff;
+            border-radius: 4px;
+            padding: 6px 16px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: 8px;
+            transition: background 0.2s;
         }
-        .wpr-link:hover { background: #8b1a1a; }
-        .accordion-content.active { max-height: 350px; padding: 16px 18px; overflow-y: auto; }
+        .wpr-link:hover {
+            background: #8b1a1a;
+        }
+        .accordion-content.active {
+            max-height: 350px;
+            padding: 16px 18px;
+            overflow-y: auto;
+        }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif; margin: 0;
-            background: linear-gradient(135deg, #f8f8f8 60%, #e3e3e3 100%); color: #222;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #f8f8f8 60%, #e3e3e3 100%);
+            color: #222;
         }
         .header {
-            background: #fff; color: #b22222; padding: 32px 0 16px 0; text-align: center;
+            background: #fff;
+            color: #b22222;
+            padding: 32px 0 16px 0;
+            text-align: center;
             box-shadow: 0 2px 8px rgba(178,34,34,0.08);
         }
-        .logo { max-width: 180px; margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(178,34,34,0.15)); }
-        .container {
-            max-width: 800px; margin: 40px auto; background: #fff; padding: 40px 32px;
-            border-radius: 14px; box-shadow: 0 4px 24px rgba(178,34,34,0.10);
+        .logo {
+            max-width: 180px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 4px rgba(178,34,34,0.15));
         }
-        h1 { margin-top: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: 1px; }
-        h2 { color: #b22222; font-size: 1.3rem; margin-bottom: 12px; }
-        .section { margin-bottom: 36px; }
-        ul.document-list { list-style: none; padding: 0; margin: 0; }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px 32px;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(178,34,34,0.10);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: #b22222;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .section {
+            margin-bottom: 36px;
+        }
+        ul.document-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
         ul.document-list li {
-            margin: 18px 0; display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 18px; background: #f7f7f7; border-radius: 6px; box-shadow: 0 1px 2px rgba(178,34,34,0.04);
+            margin: 18px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: #f7f7f7;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(178,34,34,0.04);
         }
         .download-btn {
-            background: #b22222; color: #fff; padding: 8px 20px; border: none; border-radius: 4px;
-            text-decoration: none; font-weight: 500; font-size: 1rem; transition: background 0.2s;
+            background: #b22222;
+            color: #fff;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background 0.2s;
             box-shadow: 0 2px 6px rgba(178,34,34,0.08);
         }
-        .download-btn:hover { background: #8b1a1a; }
+        .download-btn:hover {
+            background: #8b1a1a;
+        }
         .contact {
-            background: #f2f2f2; padding: 18px; border-radius: 8px; box-shadow: 0 1px 2px rgba(178,34,34,0.04);
+            background: #f2f2f2;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(178,34,34,0.04);
         }
         .announcements {
-            background: #fff7f7; border-left: 4px solid #b22222; padding: 16px 18px;
-            border-radius: 6px; margin-bottom: 24px;
+            background: #fff7f7;
+            border-left: 4px solid #b22222;
+            padding: 16px 18px;
+            border-radius: 6px;
+            margin-bottom: 24px;
         }
         @media (max-width: 700px) {
-            .container { padding: 18px 6px; }
-            h1 { font-size: 1.5rem; }
+            .container {
+                padding: 18px 6px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -85,62 +195,62 @@
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-06-04 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-06-04_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-06-04_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-06-13 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-06-13_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-06-13_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-06-20 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-06-20_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-06-20_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-06-27 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-06-27_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-06-27 _WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-07-11 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-07-11_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-07-11_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-08-01 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-08-01_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-08-01_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-08-22 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-08-22_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-08-22_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-09-19 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-09-19_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-09-19_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-10-03 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-10-03_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-10-03_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-10-17 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-10-17_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-10-17_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-10-24 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-10-24_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-10-24_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                         <div class="wpr-tile">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
                             <div class="wpr-title">2025-11-21 WPR</div>
-                            <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/WPR's/2025-11-21_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
+                            <a href="docs/WPR's/2025-11-21_WPR.pdf" class="wpr-link" target="_blank">View/Download</a>
                         </div>
                     </div>
                 </div>
@@ -151,106 +261,84 @@
                     <div class="wpr-grid">
                         <!-- Buckeye documents will be added here when requested -->
                     </div>
-                <div class="accordion" style="margin-top:18px;">
-                    <button class="accordion-btn" style="background:#8b1a1a;">Deal Documents</button>
-                    <div class="accordion-content">
-                        <div class="wpr-grid">
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
-                                <div class="wpr-title">$5million Non-Binding Term Sheet</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Deal%20Documents/$5million_Non-Binding%20Term%20S....pdf" class="wpr-link" target="_blank">View/Download</a>
-                            </div>
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
-                                <div class="wpr-title">Appraisal</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Deal%20Documents/Appraisal.pdf" class="wpr-link" target="_blank">View/Download</a>
-                            </div>
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Excel" class="wpr-icon" />
-                                <div class="wpr-title">BUCKEYE$5.2mm</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Deal%20Documents/BUCKEYE$5.2mm.xlsx" class="wpr-link" target="_blank">View/Download</a>
-                            </div>
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
-                                <div class="wpr-title">Purchase Agreement Cardinal</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Deal%20Documents/Purchase%20Agreement%20Cardinal....pdf" class="wpr-link" target="_blank">View/Download</a>
-                            </div>
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
-                                <div class="wpr-title">Real Estate Purchase Contract</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Deal%20Documents/Real%20Rstate%20Purchase%20Contract....pdf" class="wpr-link" target="_blank">View/Download</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion" style="margin-top:18px;">
-                    <button class="accordion-btn" style="background:#8b1a1a;">Insights</button>
-                    <div class="accordion-content">
-                        <div class="wpr-grid">
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
-                                <div class="wpr-title">Key Information from Meeting</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Insights/Key%20Information%20from%20Meeting....pdf" class="wpr-link" target="_blank">View/Download</a>
-                            </div>
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
-                                <div class="wpr-title">Narrative from Meeting with Buckeye</div>
-                                <a href="https://github.com/ejculp-droid/Cardinal-Transportation-Client-Portal/raw/main/docs/docs/Buckeye/Insights/Narrative%20from%20Meeting%20with%20B....pdf" class="wpr-link" target="_blank">View/Download</a>
+                    <div class="accordion" style="margin-top:18px;">
+                        <button class="accordion-btn" style="background:#8b1a1a;">Deal Documents</button>
+                        <div class="accordion-content">
+                            <div class="wpr-grid">
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                                    <div class="wpr-title">Real Rstate Purchase Contract Cardinal Buckeye.pdf</div>
+                                    <a href="docs/Buckeye/Deal Documents/Real Rstate Purchase Contract Cardinal Buckeye.pdf" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                                    <div class="wpr-title">Purchase Agreement Cardinal Buckeye.pdf</div>
+                                    <a href="docs/Buckeye/Deal Documents/Purchase Agreement Cardinal Buckeye.pdf" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Xls_icon.png" alt="Excel" class="wpr-icon" />
+                                    <div class="wpr-title">BUCKEYE$5.2mm.xlsx</div>
+                                    <a href="docs/Buckeye/Deal Documents/BUCKEYE$5.2mm.xlsx" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                                    <div class="wpr-title">Appraisal.pdf</div>
+                                    <a href="docs/Buckeye/Deal Documents/Appraisal.pdf" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                                    <div class="wpr-title">$5million_Non-Binding Term Sheet(Elliott Created).pdf</div>
+                                    <a href="docs/Buckeye/Deal Documents/$5million_Non-Binding Term Sheet(Elliott Created).pdf" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion" style="margin-top:18px;">
-                    <button class="accordion-btn" style="background:#8b1a1a;">Photos</button>
-                    <div class="accordion-content">
-                        <div class="wpr-grid">
-                            <div class="wpr-tile">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Folder_icon.svg" alt="Photos Folder" class="wpr-icon" />
-                                <div class="wpr-title">Buckeye Photos Folder</div>
-                                <a href="https://onedrive.live.com/your-shared-folder-link" class="wpr-link" target="_blank">View All Photos</a>
+                    <div class="accordion" style="margin-top:18px;">
+                        <button class="accordion-btn" style="background:#8b1a1a;">Insights</button>
+                        <div class="accordion-content">
+                            <div class="wpr-grid">
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                                    <div class="wpr-title">Narrative from Meeting with Buckeye Charter Owners.pdf</div>
+                                    <a href="docs/Buckeye/Insights/Narrative from Meeting with Buckeye Charter Owners.pdf" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="wpr-icon" />
+                                    <div class="wpr-title">Key Information from Meeting with Buckeye Charter Owners.pdf</div>
+                                    <a href="docs/Buckeye/Insights/Key Information from Meeting with Buckeye Charter Owners.pdf" class="wpr-link" target="_blank">View/Download</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="accordion" style="margin-top:18px;">
+                        <button class="accordion-btn" style="background:#8b1a1a;">Photos</button>
+                        <div class="accordion-content">
+                            <div class="wpr-grid">
+                                <div class="wpr-tile">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Folder_icon_yellow.svg" alt="Photos Folder" class="wpr-icon" />
+                                    <div class="wpr-title">All Buckeye Photos</div>
+                                    <a href="https://onedrive.live.com/YOUR_ONEDRIVE_LINK_HERE" class="wpr-link" target="_blank">View Folder</a>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="image-modal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
-        <span id="modal-close" style="position:absolute;top:32px;right:48px;font-size:2.5rem;color:#fff;cursor:pointer;font-weight:bold;">×</span>
-        <img id="modal-img" src="" alt="Photo" style="max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 4px 32px #b2222280;display:block;margin:auto;" />
-    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var accordionBtns = document.querySelectorAll('.accordion-btn');
-            accordionBtns.forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var content = btn.nextElementSibling;
-                    content.classList.toggle('active');
-                });
-            });
-            var modal = document.getElementById('image-modal');
-            var modalImg = document.getElementById('modal-img');
-            var modalClose = document.getElementById('modal-close');
-            document.querySelectorAll('.accordion-content .wpr-grid .wpr-tile img').forEach(function(img) {
-                img.style.cursor = 'zoom-in';
-                img.addEventListener('click', function(e) {
-                    modal.style.display = 'flex';
-                    modalImg.src = img.src;
-                    modalImg.alt = img.alt;
-                });
-            });
-            modalClose.addEventListener('click', function() {
-                modal.style.display = 'none';
-                modalImg.src = '';
-            });
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                    modalImg.src = '';
-                }
+    // Accordion functionality for all sections
+    document.addEventListener('DOMContentLoaded', function() {
+        var accordionBtns = document.querySelectorAll('.accordion-btn');
+        accordionBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var content = btn.nextElementSibling;
+                content.classList.toggle('active');
             });
         });
+    });
     </script>
 </body>
 </html>
